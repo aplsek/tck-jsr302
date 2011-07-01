@@ -1,0 +1,22 @@
+Project: TCK-JSR302
+Authors:
+         - Ales Plsek, <aplsek@gmail.com>, Purdue University
+         - Martin Schoeberl <masca@imm.dtu.dk>, Technical University of Denmark
+         - Lei Zhao, Purdue University
+         - Jan Vitek, Purdue University
+
+Mailing-list: scj@cs.purdue.edu
+==========================
+
+
+Info
+===================
+ 
+Technology Compatibility Kits (TCKs) are a required component of any Java Specification Request (JSR). This project provides such a TCK for SafetyCritical Java (SCJ), which is being specified as JSR-302.
+
+
+
+More Info
+===================
+Se JSR-302 Home Page: http://www.jcp.org/en/jsr/detail?id=302
+See the oSCJ webpage: http://www.ovmj.net/oscj/
