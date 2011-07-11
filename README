@@ -31,7 +31,7 @@ The TCK is specified in the "Makefile.Test".
 Run the TCK:
 $ make check
 
-The users can also run the TCK only for specific SCJ level:
+The users can also run the TCK only for a specific SCJ level:
 $ make check-level0
 or
 $ make check-level1
@@ -41,6 +41,7 @@ $ make check-level2
 To "recall" the results of the last TCK run, execute:
 $ make recall
 
+More 
 
 Structure of the TCK
 =============================
@@ -91,8 +92,6 @@ Further, user can provide an alternative TCK file:
 To provide an alternative TCK file, run the TCK as follows:
 $ make check TCK=MyMakefile.Test
 - by overriding the TCK variable, we can provide an alternative TCK definition.
-
-                                                                                --compare output.out expected-output.out
 
                                                                                                                          Summary:
         
