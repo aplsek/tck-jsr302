@@ -1,0 +1,21 @@
+_all:
+	$(MAKE) all
+
+checkdeps:
+	echo "# generated file -- do not edit" > depend.mk
+
+Makefile:
+
+
+TCK=Makefile.Test
+
+%: checkdeps
+	echo $@
+	echo $(TCK)
+	rm -f .phony
+	./config.status
+	$(MAKE) -f RealMakefile $@ TCK=$(TCK)
+
+clean:
+    
+

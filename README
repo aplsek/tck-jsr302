@@ -15,8 +15,39 @@ Info
 Technology Compatibility Kits (TCKs) are a required component of any Java Specification Request (JSR). This project provides such a TCK for SafetyCritical Java (SCJ), which is being specified as JSR-302.
 
 
+TCK : Install
+===================
+
+
+TCK : Running
+===================
+
+
+The TCK is specified in the "Makefile.Test".
+
+Run the TCK
+$ make check
+
+The users can also run the TCK only for specific SCJ level:
+$ make check-level0
+or
+$ make check-level1
+or
+$ make check-level2
+
+
+TCK : TCK specification and its modification
+===================================================
+
+To provide an alternative TCK file, run the TCK as follows:
+$ make check TCK=MyMakefile.Test
+- by overriding the TCK variable, we can provide an alternative TCK definition.
+
+
+
 
 More Info
-===================
-See JSR-302 Home Page: http://www.jcp.org/en/jsr/detail?id=302
+=============================================================
+Se JSR-302 Home Page: http://www.jcp.org/en/jsr/detail?id=302
 See the oSCJ webpage: http://www.ovmj.net/oscj/
+TCK project code repository: git@github.com:aplsek/tck-jsr302.git

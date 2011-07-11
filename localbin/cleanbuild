@@ -1,0 +1,7 @@
+rm -rf build
+rm -rf configure config.status config.log autom4te.cache RealMakefile Makefile
+mkdir build
+
+autoreconf -i
+./configure
+make

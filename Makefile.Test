@@ -1,0 +1,50 @@
+#! make
+
+
+VMFLAGS="--max-threads 3" 
+SCJFLAGS="--scj --scj-scope-backing 3100k --g-def-immortal-mem 5000k"
+
+#
+# TODO: this must be specified by the user during installation!!
+#
+VM_HOME="/Users/plsek/fiji/fivm/"
+SCJ="lib/scj.jar"
+JAVAC="javac"
+
+#
+# FULL SCJ CHECK
+#
+
+check-scj: check-level0 check-level1 check-level2
+#
+#
+#
+
+LEVEL0=tests/level0
+LEVEL1=tests/level1
+LEVEL2=tests/level2
+
+#
+#
+
+check-level0: TestHelloWorld TestMemory
+
+check-level1: 
+
+check-level2: 
+
+check: TestMemory
+
+TestHelloWorld:
+	$(JAVAC) -cp $(VM_HOME)/$(SCJ) $(LEVEL0)/TestHelloWorld/src/*.java -d $(LEVEL0)/TestHelloWorld/build/
+	$(VM_HOME)/bin/fivmc -o build/hello --scj-safelet HelloWorld $(SCJFLAGS) $(VMFLAGS) $(LEVEL0)/TestHelloWorld/build/*.class
+	./build/hello > build/output.out
+	diff build/output.out $(LEVEL0)/TestHelloWorld/build/TestHelloWorld/output.out
+	
+TestMemory:
+	$(JAVAC) -cp $(VM_HOME)/lib/scj.jar $(LEVEL0)/TestMemory/src/*.java -d $(LEVEL0)/TestMemory/build/
+	$(VM_HOME)/bin/fivmc -o build/memory --scj-safelet TestMemory $(SCJFLAGS) $(VMFLAGS) $(LEVEL0)/TestMemory/build/
+	./build/memory > build/output.out
+	diff build/output.out $(LEVEL0)/TestMemory/output.out	
+	
+	

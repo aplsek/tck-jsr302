@@ -1,0 +1,16 @@
+< setUp.
+<  total = 40960
+<  free = 1048576
+< Initializing.. area = javax.realtime.ImmortalMemory@400019
+<    size = 5120000
+<    used = 45556
+<    left = 5074444
+<  area = javax.safetycritical.MissionMemory@e209f
+<    size = 500000
+<    used = 16780
+<    left = 482388
+< Memory area is javax.safetycritical.MissionMemory@e209f
+< TestMemory.
+< TestMemory.
+< cleanUp.
+< tearDown.

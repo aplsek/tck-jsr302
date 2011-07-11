@@ -1,0 +1,62 @@
+JAVAC=javac
+JAR=@JAR@
+RUBY=ruby
+
+include depend.mk
+
+
+#########
+#
+
+all: install
+
+
+#
+#
+#  INSTALL
+#
+
+test-make-pull:
+	./localbin/pullcleantestmake
+
+test-make-config: test-make-pull ./localbin/testmake/configure.ac
+	(cd localbin/testmake/ && autoreconf -i)
+	(cd localbin/testmake/ && ./configure)
+
+test-make-install: test-make-config localbin/testmake/Makefile
+	(cd localbin/testmake/ && make)
+
+install: test-make-install
+
+
+
+#
+# CLEAN
+#
+
+clean: 
+	(cd localbin/testmake/ && make clean)
+
+
+
+
+#
+#
+# RUN TESTS
+#
+#
+
+TCK=Makefile.Test
+
+check:
+	echo $@
+	$(RUBY) ./localbin/testmake/bin/testmake check --file $(TCK)
+
+check-scj: 
+	$(RUBY) ./localbin/testmake/bin/testmake check-scj 
+
+check-scj-quiet:
+	$(RUBY) ./localbin/testmake/bin/testmake check-scj --quiet 
+
+recall:
+	./localbin/testmake/bin/recall

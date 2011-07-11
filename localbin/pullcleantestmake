@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+set -x
+
+if test -e ./localbin/testmake
+then
+    (cd ./localbin/testmake && hg pull)
+    (cd ./localbin/testmake && hg up)
+else
+    hg clone https://test-make.googlecode.com/hg/ ./localbin/testmake 
+fi
+
