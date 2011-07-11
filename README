@@ -18,6 +18,9 @@ Technology Compatibility Kits (TCKs) are a required component of any Java Specif
 TCK : Install
 ===================
 
+To install the TCK, run
+$ ./localbin/cleanbuild
+
 
 TCK : Running
 ===================
@@ -25,7 +28,7 @@ TCK : Running
 
 The TCK is specified in the "Makefile.Test".
 
-Run the TCK
+Run the TCK:
 $ make check
 
 The users can also run the TCK only for specific SCJ level:
@@ -35,15 +38,68 @@ $ make check-level1
 or
 $ make check-level2
 
+To "recall" the results of the last TCK run, execute:
+$ make recall
 
-TCK : TCK specification and its modification
-===================================================
+
+Structure of the TCK
+=============================
+
+We structure the TCK as follows:
+tck/
+    level0/
+        Test1/
+            build/
+            src/
+                Test1.java   // the Safelet
+                *.java
+            output.out
+        Test2/
+            ...
+    level1/
+        ...
+    level2/
+        ...
+
+The following rules should be respected when adding new test-cases:
+      - test cases are divided into levels,
+      - each subdirectory of a level* dir represents one test case,
+      - the test case's name is defined by the subdirectory containting the testcase, 
+        the name of the Safelet java file is the same as the name of the safelet.
+      - each test-case dir has: a src/ dir
+      - each test-case contains an "output.out" file specifying the expected output
+
+
+TCK Harness tool
+=================================
+
+A harness tool "test-make" is distributed with the TCK (it is pulled from its reposity during the installation of the TCK.). The tool is responsible for running the test cases, storing the results of a TCK run and reporting the results.
+
+A dedicated file called "Makefile.Test" is used to specify the compilation and running parameters of the test-cases. 
+The harness tool parses this file and executes the test-cases according to its content. 
+The "Makefile.Test" is given in a form very similar to a Makefile:
+
+TestCase1: dependency1 dependency2
+        $(JAVAC) -cp $(VM)/lib/scj.jar tests/level0/TestCase1/src/*.java -d tests/level0/TestCase1/build
+        $(JAVA) -cp tests/level0/TestCase1/build tests/level0/TestCase1/TestCase1 > output.out
+        diff build/output.out expected-output.out
+
+The user is allowed to modify the Makefile.Test, add new test-cases and change to parameters of the existing test-cases.
+Further, user can provide an alternative TCK file:
+
 
 To provide an alternative TCK file, run the TCK as follows:
 $ make check TCK=MyMakefile.Test
 - by overriding the TCK variable, we can provide an alternative TCK definition.
 
+                                                                                --compare output.out expected-output.out
 
+                                                                                                                         Summary:
+        
+The "test-make" tool allows users to:
+- easily add/remove tests, change compilation/run parameters for each test (an additional script could be 
+provided to automatically add new test-cases),
+- reuse the same "Makefile.Test" for different platforms.
 
 
 More Info
