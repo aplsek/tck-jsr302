@@ -38,8 +38,6 @@ clean:
 	(cd localbin/testmake/ && make clean)
 
 
-
-
 #
 #
 # RUN TESTS
@@ -50,13 +48,14 @@ TCK=Makefile.Test
 
 check:
 	echo $@
-	$(RUBY) ./localbin/testmake/bin/testmake check --file $(TCK)
+	echo $(VM_HOME)
+	$(RUBY) ./localbin/testmake/bin/testmake check --file $(TCK) VM_HOME=$(VM_HOME) JAVAC=$(JAVAC) SCJ=$(SCJ)
 
 check-scj: 
-	$(RUBY) ./localbin/testmake/bin/testmake check-scj 
+	$(RUBY) ./localbin/testmake/bin/testmake check-scj --file $(TCK) VM_HOME=$(VM_HOME) JAVAC=$(JAVAC) SCJ=$(SCJ)
 
 check-scj-quiet:
-	$(RUBY) ./localbin/testmake/bin/testmake check-scj --quiet 
+	$(RUBY) ./localbin/testmake/bin/testmake check-scj --file $(TCK) --quiet VM_HOME=$(VM_HOME) JAVAC=$(JAVAC) SCJ=$(SCJ)
 
 recall:
 	./localbin/testmake/bin/recall

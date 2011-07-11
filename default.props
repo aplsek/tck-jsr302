@@ -1,0 +1,4 @@
+VM_HOME="/Users/plsek/fiji/fivm/"
+SCJ="lib/scj.jar"
+JAVAC="javac"
+TCK="Makefile.Test"

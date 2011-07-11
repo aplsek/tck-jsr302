@@ -7,9 +7,9 @@ SCJFLAGS="--scj --scj-scope-backing 3100k --g-def-immortal-mem 5000k"
 #
 # TODO: this must be specified by the user during installation!!
 #
-VM_HOME="/Users/plsek/fiji/fivm/"
-SCJ="lib/scj.jar"
-JAVAC="javac"
+#VM_HOME="/Users/plsek/fiji/fivm/"
+#SCJ="lib/scj.jar"
+#JAVAC="javac"
 
 #
 # FULL SCJ CHECK

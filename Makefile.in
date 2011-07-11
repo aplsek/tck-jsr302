@@ -14,7 +14,7 @@ TCK=Makefile.Test
 	echo $(TCK)
 	rm -f .phony
 	./config.status
-	$(MAKE) -f RealMakefile $@ TCK=$(TCK)
+	$(MAKE) `cat default.props | xargs ` -f RealMakefile $@
 
 clean:
     
