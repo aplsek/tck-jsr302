@@ -15,11 +15,22 @@ Info
 Technology Compatibility Kits (TCKs) are a required component of any Java Specification Request (JSR). This project provides such a TCK for SafetyCritical Java (SCJ), which is being specified as JSR-302.
 
 
-TCK : Install
+TCK : Install & Settings
 ===================
 
-To install the TCK, run
+1. Install the TCK, run
 $ ./localbin/cleanbuild
+
+
+2. Set-up the TCK:
+2.1 modify the tck/default.props file. This file contains the basic paths to the VM and SCJ lib that 
+        should be tested by this TCK. The file structure is:
+VM_HOME="path/to/VM/dir"
+SCJ="/path/to/scj.jar"
+JAVAC="javac to compile the TCK"
+TCK="name of the Makefile.Test or an alternative Makefile.Test file"
+        
+Modify the file according to your needs.
 
 
 TCK : Running
@@ -48,6 +59,7 @@ Structure of the TCK
 
 We structure the TCK as follows:
 tck/
+  tests/
     level0/
         Test1/
             build/
@@ -71,6 +83,34 @@ The following rules should be respected when adding new test-cases:
       - each test-case contains an "output.out" file specifying the expected output
 
 
+TCK distribution dir/ structure
+===============================
+
+tck/
+    build/               // build dir containting temporary files during the TCK checking
+    tests/               // contains the TCK test-cases
+    localbin/            // contains scripts for installation of the TCK and the "test-make" tool
+    README               // this readme file
+    RealMakefile.in     
+    Makefile.in
+    Makefile.Test        // default file specifying the TCK test-cases
+    default.props        // default file specifying the VM and SCJ lib to be tested agains.
+    install-sh
+    configure.ac
+    
+Further, the following files are generated after installation:
+tck/    
+    localbin/testmake
+    Makefile
+    RealMakefile
+    config.status
+    config.log
+    tester-output.conf
+    depend.mk
+    configure/
+    
+           
+
 TCK Harness tool
 =================================
 
@@ -89,9 +129,9 @@ The user is allowed to modify the Makefile.Test, add new test-cases and change t
 Further, user can provide an alternative TCK file:
 
 
-To provide an alternative TCK file, run the TCK as follows:
-$ make check TCK=MyMakefile.Test
-- by overriding the TCK variable, we can provide an alternative TCK definition.
+To provide an alternative TCK file, modify the TCK variable in the default.props file and run:
+$ make check
+- by overriding the TCK variable, we can provide an alternative TCK definition that will be used instead of the default "Makefile.Test".
 
                                                                                                                          Summary:
         
